@@ -1,0 +1,36 @@
+body
+{
+	background-position: 40%;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: 100vw;
+
+}
+
+div {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+h1{
+	font-size: 2vw;
+}
+h2{
+	font-size: 1vw;
+}
+h3{
+	font-size: 1vw;
+}
+@media screen and (min-width: 601px) {
+  div.container {
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  div.container {
+    font-size: 10px;
+  }
+ 
+
+

@@ -1,0 +1,21 @@
+body
+{
+	background-image:url('home.jpg');
+	background-position: 40%;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: 100vw;
+
+}
+
+h1{
+	font-size: 2vw;
+}
+h3{
+	font-size: 1vw;
+}
+h4{
+	font-size: 1vw;
+}
+
+
