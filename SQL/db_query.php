@@ -1,18 +1,7 @@
-<?php
-$servername = "localhost";
-$username = "username";
-$password = "";
-$dbname = "excel_import";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+//CREATE MYSQL OR MARIA_DB DATABASE WITH NAME 'plan_db' 
 /* SQL TO CREATE TABLE schemes, COPY BELOW QUERY AND RUN IN MARIA_DB  */
-$sql = "CREATE TABLE schemes (
+
+"CREATE TABLE schemes (
 id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 user_id VARCHAR(30) NOT NULL,
 name_scheme VARCHAR(150) NOT NULL,
@@ -25,10 +14,10 @@ FY VARCHAR(50) NOT NULL
 
 )";
 
-/*COPY BELOW QUERY AND RUN THIS IN MARIA_DB
+/*COPY BELOW QUERY AND RUN THIS IN MARIA_DB */
 
 
-FOR CREATING TABLE users
+//FOR CREATING TABLE users
 
  "CREATE TABLE users (
 slno INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -41,16 +30,3 @@ HOD VARCHAR(30) NOT NULL
 )";
 
 
-
-*/
-
-
-
-if ($conn->query($sql) === TRUE) {
-    echo "Table MyGuests created successfully";
-} else {
-    echo "Error creating table: " . $conn->error;
-}
-
-$conn->close();
-?>
