@@ -1,21 +1,19 @@
 <?php include_once('header.php'); ?>
-<!------END !------->
-
 <div class="container">
 	<table>
 	<div class="row">
 		<div class="col-lg-6">
 		<td>
-			<a href="<?php echo site_url("Admin") ?>" class="btn btn-lg btn-primary">DEPT-WISE LIST</a>
+			<a href="<?php echo site_url("Auth") ?>" class="btn btn-lg btn-primary">DEPT-WISE LIST</a>
 		</td>	
 		<td>
-		<a href="<?php echo site_url('user') ?>" class="btn btn-lg btn-primary">SHOW ALL PROJECTS LIST</a>
+		<a href="<?php echo site_url('Admin') ?>" class="btn btn-lg btn-primary">SHOW ALL PROJECTS LIST</a>
 		</td>
 		<td>
 		<a href="<?php echo site_url('Admin/dashboard') ?>" class="btn btn-lg btn-primary">DEPT DASHBOARD</a>
 		</td>
 		 <td>
-            <a href="<?php echo site_url("User/extra") ?>" class="btn btn-lg btn-primary">Dept. Wise Project</a>
+            <a href="<?php echo site_url("Admin/extra") ?>" class="btn btn-lg btn-primary">Dept. Wise Project</a>
         </td>
 		</div>
 	</div>
