@@ -4,8 +4,6 @@
 	//print_r($dept_id); die();
 
 ?>
-
-<!--TESTING CODE START HERE !-->
 	<table border="1" class="table table-hover">
 		<thead align="center">
 			<tr style="color:green;">
@@ -22,7 +20,7 @@
 		
 			<tr align="center">
 					<td> <?= ++$count ?> </td>
-					<td><?= anchor ("user/dept_category/{$dd->category}/{$dd->user_id}",$dd->category) ?></td>	
+					<td><?= anchor ("Admin/dept_category/{$dd->category}/{$dd->user_id}",$dd->category) ?></td>	
 					<td><b> <?= $dd->TOTAL ; ?> Nos </b></td>
 					<td><b> Rs. <?= $dd->AMOUNT ; ?> Lakhs </b></td>					
 		    </tr>
