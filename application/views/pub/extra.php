@@ -25,10 +25,10 @@
 		<a href="<?php echo site_url('Admin/dashboard') ?>" class="btn btn-lg btn-primary">DEPT DASHBOARD</a>
 		</td>
 		 <td>
-            <a href="<?php echo site_url("User/extra") ?>" class="btn btn-lg btn-primary">Dept. Wise Project</a>
+            <a href="<?php echo site_url("Admin/extra") ?>" class="btn btn-lg btn-primary">Dept. Wise Project</a>
         </td>
         <td>
-		<a href="<?php echo site_url('user') ?>" class="btn btn-lg btn-primary">SHOW ALL PROJECTS</a>
+		<a href="<?php echo site_url('Admin') ?>" class="btn btn-lg btn-primary">SHOW ALL PROJECTS</a>
 		</td>
 		<td>
 			<a href="<?php echo site_url("Login/updatePwd") ?>" class="btn btn-lg btn-primary">A/C Setting</a>
@@ -89,7 +89,7 @@
 			<tr align="center">
 					<td><?php echo $count; ?></td>
 					<td> <?=  
-					//anchor ("user/article/{$data['id']}",$data['name_scheme']); 
+					//anchor ("Admin/scheme/{$data['id']}",$data['name_scheme']); 
 								$data['name_scheme'];
 					      ?> </td>	
 					<td><b>Rs. <?php echo $data['budget_est']; ?> Lakhs</b></td>
