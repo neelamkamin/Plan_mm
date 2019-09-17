@@ -7,13 +7,13 @@
 	            <a href="<?php echo site_url("Admin/show_category") ?>" class="btn btn-lg btn-primary">Category of Fund</a>
 	        </td>
 		<td>
-			<a href="<?php echo site_url("Admin") ?>" class="btn btn-lg btn-primary">DEPT-WISE LIST</a>
+			<a href="<?php echo site_url("Auth") ?>" class="btn btn-lg btn-primary">DEPT-WISE LIST</a>
 		</td>
 			<td>
 		<a href="<?php echo site_url('Admin/dashboard') ?>" class="btn btn-lg btn-primary">DEPT DASHBOARD</a>
 		</td>
 		 <td>
-            <a href="<?php echo site_url("User/extra") ?>" class="btn btn-lg btn-primary">Dept. Wise Project</a>
+            <a href="<?php echo site_url("Admin/extra") ?>" class="btn btn-lg btn-primary">Dept. Wise Project</a>
         </td>
 		<td>
 			<a href="<?php echo site_url("Login/updatePwd") ?>" class="btn btn-lg btn-primary">A/C Setting</a>
@@ -75,9 +75,9 @@
 			</thead>
 		<tbody>
 			<tr>
-			<? if ( count($articles)): ?>
+			<? if ( count($schemes)): ?>
 		<?php	$count = $this->uri->segment(3,0); ?>
-		<?php foreach( $articles as $mm): ?>
+		<?php foreach( $schemes as $mm): ?>
 				<td>(<?= ++$count ?>)</td>
 				<td><?= anchor ("user/article/{$mm->id}",$mm->name_scheme) ?></td>
 				
