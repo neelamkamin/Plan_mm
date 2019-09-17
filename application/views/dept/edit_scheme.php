@@ -10,10 +10,10 @@
 </head>
 <body>
   <button class="btn btn-default" style="float:right"><a href="<?php echo site_url("login/logout") ?>">Logout</a></button>
-  <button class="btn btn-default" style="float:left"><a href="<?php echo site_url("Admin/dashboard") ?>">Back</a></button>
+  <button class="btn btn-default" style="float:left"><a href="<?php echo site_url("Dept") ?>">Back</a></button>
 
 <?php 
-echo form_open("Dept/update_scheme/{$article->id}",['class'=>'form-horizontal']);
+echo form_open("Dept/update_scheme/{$scheme->id}",['class'=>'form-horizontal']);
 //THIS EXTENSION i.e "{artic->id}" is to provide article-id OF ARTICLE TO BE UPDATE
 //PLZ SEE SYNTEX= "public function update_article($artic_id)" OF ADMIN.PHP FILE ON LINE 60
 //IN WHICH '{artic->id}' IS PASS AS PERAMETER///  
@@ -34,7 +34,7 @@ echo form_open("Dept/update_scheme/{$article->id}",['class'=>'form-horizontal'])
       <div class="col-lg-6">
 
  <?php //HERE WE R USING INBUILT FORM_INPUT FUNCTION OF CODEIGNITER, INSTEAD OF USING HTML FORM INPUT*//
- echo form_input(['name'=>'name_scheme','class'=>"form-control",'placeholder'=>'Enter Scheme Name','value'=>set_value('name_scheme',$article->name_scheme)]); 
+ echo form_input(['name'=>'name_scheme','class'=>"form-control",'placeholder'=>'Enter Scheme Name','value'=>set_value('name_scheme',$scheme->name_scheme)]); 
   ?> 
       </div>
   	</div>
@@ -46,7 +46,7 @@ echo form_open("Dept/update_scheme/{$article->id}",['class'=>'form-horizontal'])
       <label for="inputEmail" class="col-lg-6 control-label">FINANCIAL YEAR</label>
       <div class="col-lg-6">
     <?php //HERE WE R USING INBUILT FORM_INPUT FUNCTION OF CODEIGNITER, INSTEAD OF USING HTML FORM INPUT*//
-   echo form_input(['name'=>'FY','class'=>"form-control",'placeholder'=>'Enter Financial Year','value'=>set_value('FY',$article->FY)]); 
+   echo form_input(['name'=>'FY','class'=>"form-control",'placeholder'=>'Enter Financial Year','value'=>set_value('FY',$scheme->FY)]); 
     ?> 
     </div></div></div></div></div>
 
@@ -76,7 +76,7 @@ echo form_open("Dept/update_scheme/{$article->id}",['class'=>'form-horizontal'])
       <label for="inputEmail" class="col-lg-6 control-label">BUDGET ESTIMATE (In Lakhs only)</label>
       <div class="col-lg-6">
     <?php //HERE WE R USING INBUILT FORM_INPUT FUNCTION OF CODEIGNITER, INSTEAD OF USING HTML FORM INPUT*//
-   echo form_input(['name'=>'budget_est','class'=>"form-control",'placeholder'=>'Total Budget Estimate (in Rs.)','value'=>set_value('budget_est',$article->budget_est)]); 
+   echo form_input(['name'=>'budget_est','class'=>"form-control",'placeholder'=>'Total Budget Estimate (in Rs.)','value'=>set_value('budget_est',$scheme->budget_est)]); 
     ?> 
     </div></div></div></div></div>
   
