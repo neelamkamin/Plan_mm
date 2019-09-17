@@ -1,7 +1,5 @@
 <?php include 'sum.php'; ?>
 <?php include_once 'admin_header.php'; ?>
-<!------END !------->
-
 
 <div class="container">
     <table>
@@ -11,13 +9,13 @@
             <a href="<?php echo site_url("Admin") ?>" class="btn btn-lg btn-primary">DEPT-WISE LIST</a>
         </td>
         <td>
-        <a href="<?php echo site_url('User') ?>" class="btn btn-lg btn-primary">ALL PROJECT LIST ACROSS ALL DEPTS</a>
+        <a href="<?php echo site_url('Auth') ?>" class="btn btn-lg btn-primary">ALL PROJECT LIST ACROSS ALL DEPTS</a>
         </td>
         <td>
-        <a href="<?php echo site_url('Admin/dashboard') ?>" class="btn btn-lg btn-primary">DEPT DASHBOARD</a>
+        <a href="<?php echo site_url('#') ?>" class="btn btn-lg btn-primary">DASHBOARD</a>
         </td>
         <td>
-            <a href="<?php echo site_url("User/extra") ?>" class="btn btn-lg btn-primary">Dept. Wise Project</a>
+            <a href="<?php echo site_url("Admin/extra") ?>" class="btn btn-lg btn-primary">Dept. Wise Project</a>
         </td>
          <td>
             <a href="<?php echo site_url("Import") ?>" class="btn btn-lg btn-primary">Import Excel</a>
@@ -45,7 +43,7 @@
         <?php foreach ($cat as $key => $sin): ?>
             
  <td> <?= ++$count ?> </td>
- <td> <?= anchor ("User/fund_result/{$sin->fund_cat}",$sin->fund_cat) ?> </td>
+ <td> <?= anchor ("Admin/fund_result/{$sin->fund_cat}",$sin->fund_cat) ?> </td>
  <td> Rs. <?= $sin->AMOUNT; ?> Lakhs </td>
  </tr>
 
