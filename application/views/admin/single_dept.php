@@ -1,6 +1,5 @@
 <?php include 'sum.php'; ?>
 <?php include_once 'admin_header.php'; ?>
-<!------END !------->
 <br> <br>
 <?php echo "Welcome Super Admin :-  ". $_SESSION['user_id']; ?>
 <div class="container-fluid">
@@ -14,10 +13,10 @@
             <a href="<?php echo site_url("Admin/show_schemes") ?>" class="btn btn-lg btn-primary">Category of Scheme</a>
         </td>
         <td>
-        <a href="<?php echo site_url('User') ?>" class="btn btn-lg btn-primary">ALL SCHEME LIST ACROSS ALL DEPTS</a>
+        <a href="<?php echo site_url('Auth') ?>" class="btn btn-lg btn-primary">ALL SCHEME LIST ACROSS ALL DEPTS</a>
         </td>
          <td>
-            <a href="<?php echo site_url("Admin/dashboard") ?>" class="btn btn-lg btn-primary">Dashboard</a>
+            <a href="<?php echo site_url("#") ?>" class="btn btn-lg btn-primary">Dashboard</a>
         </td>
         <td>
             <a href="<?php echo site_url("Login/updatePwd") ?>" class="btn btn-lg btn-primary">A/C Setting</a>
@@ -35,9 +34,6 @@
                         <?php 
                               echo dash(); 
 
-                              //echo "<pre>";
-                                //print_r($tol);
-                                //exit;
                          ?>
 </div></div></div></div>
 
@@ -58,7 +54,7 @@
         <?php foreach ($tol as $key => $sin): ?>
             
  <td> <?= ++$count ?> </td>
- <td> <?= anchor ("User/dept_result/{$sin['user_id']}", $sin['user_id']); ?> </td>
+ <td> <?= anchor ("Admin/dept_result/{$sin['user_id']}", $sin['user_id']); ?> </td>
  <td align="center"> Rs. <?= $sin['AMOUNT']; ?> Lakhs </td>
  <td align="center"> <?= $sin['TOTAL']; ?> Nos</td>
  </tr>
