@@ -8,16 +8,16 @@ class Import extends CI_Controller {
     function __construct() {
 
      parent::__construct();
-      if(! $this->session->userdata('user_id'))
+      if(! $this->session->userdata('dept_id'))
       return redirect('Login');
 
-      $user_id = $this->session->userdata('user_id');
-      //print_r($user_id); exit;
+      $dept_id = $this->session->userdata('dept_id');
+      //print_r($dept_id); exit;
       $admin_id = "Planing_and_Investment";
 /*THIS 'Planing_and_Investment' IS THE 'id' ALREADY MADE IN DATABASE AS SUPER ADMIN
   SUPER ADMIN IS THE DEPT. OF PLANNING & INVESTMENT, GOVT. OF ARUNACHAL PRADESH
  */
-      if ($user_id == $admin_id)
+      if ($dept_id == $admin_id)
             {
               $this->load->helper('form');
               $this->load->library('excel');
@@ -37,7 +37,7 @@ class Import extends CI_Controller {
 
   if ($this->input->post('submit')) {
             
-            $path = 'uploads_mm';
+            $path = 'uploads_mm/excel_mm/';
             require_once APPPATH . "/third_party/PHPExcel.php";
             $config['upload_path'] = $path;
             $config['allowed_types'] = 'xlsx|xls';
@@ -70,7 +70,7 @@ class Import extends CI_Controller {
                     $flag =false;
                     continue;
                   }
-                  $inserdata[$i]['user_id']                = $value['B'];
+                  $inserdata[$i]['dept_id']                = $value['B'];
                   $inserdata[$i]['FY']                     = $value['C'];
                   $inserdata[$i]['pre_budget_est']         = $value['D'];
                   $inserdata[$i]['pre_revised_est']        = $value['E'];
@@ -84,8 +84,11 @@ class Import extends CI_Controller {
                 }               
                 $result = $this->import_model->importdata($inserdata);   
                 if($result){
-                  echo "Imported successfully to Database-mm";
-                  $this->load->view('Admin/all_total');
+
+                  $this->session->set_flashdata('feedback',"Excel Records imported Succesfully.");
+                  $this->session->set_flashdata('feedback_class','alert-success');
+                  return redirect('Auth');
+
                 }else{
                   echo "ERROR mm!";
                 }             
