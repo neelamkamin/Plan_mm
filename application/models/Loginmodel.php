@@ -10,7 +10,9 @@ class Loginmodel extends CI_Model {
 					->get('users');
  //$q = select * from users where 'u_name'= $username and 'pass' = $password (CORE PHP SYNTEX)
 		if ($q->num_rows() > 0) {
-				return $q->row()->id;
+			//$ss =	$q->row(); print_r($ss); exit();
+				return $q->row();
+				//return $q->row()->id;
 				//return TRUE;
 		}else {
 			return FALSE;
@@ -18,10 +20,10 @@ class Loginmodel extends CI_Model {
 	}
 //BELOW CODE IS FOR PASSWORD CHANGE//
 
-	public function getCurrPassword($user_id)
+	public function getCurrPassword($dept_id)
 	{
 		$query = $this->db
-						->where(['id'=>$user_id])
+						->where(['id'=>$dept_id])
 							->get('users');
 
 		if($query->num_rows() > 0){
@@ -29,12 +31,12 @@ class Loginmodel extends CI_Model {
 		}
 	}
 
-	public function updatePassword($new_password, $user_id)
+	public function updatePassword($new_password, $dept_id)
 	{
 		$data = array( 'pass' => $new_password );
 
 		return $this->db
-						->where('id', $user_id)
+						->where('id', $dept_id)
 							->update('users', $data);
 	}
 
