@@ -1,17 +1,31 @@
 <?php 
 class Auth extends CI_Controller {
 /*THIS IS AUTHORIZATION CONTROLLER ACT AS MIDDLE_WARE 
-THIS CONTROLLER IS MADE TO ENSURE THAT SESSION 'user_id' IS SET
-IN CI WITHOUT CACHE MEMORY 'user_id' IS NOT SET IN FIRST ATTEMPT EVEN IF USERNAME & P/W ARE CORRECT
+THIS CONTROLLER IS MADE TO ENSURE THAT SESSION 'dept_id' IS SET
+IN CI WITHOUT CACHE MEMORY 'dept_id' IS NOT SET IN FIRST ATTEMPT EVEN IF USERNAME & P/W ARE CORRECT
 WE ALREADY TESTED IN BY DELETING ALL HISTORY 
 */
 
 	public function __construct()
 	{
 			parent::__construct();
-			if(! $this->session->userdata('user_id'))
+			if(! $this->session->userdata('dept_id'))
 				return redirect('Login');
-				$this->load->model('Schemes_model');
+			$dept_id = $this->session->userdata('dept_id'); //print_r($dept_id); exit;
+
+			$admin_id = "Planing_and_Investment";
+/*THIS 'Planing_and_Investment' IS THE 'id' ALREADY MADE IN DATABASE AS SUPER ADMIN
+  SUPER ADMIN IS THE DEPT. OF PLANNING & INVESTMENT, GOVT. OF ARUNACHAL PRADESH
+ */
+			if ($dept_id == $admin_id)
+				{
+					$this->load->model('Schemes_model');
+
+				}else {
+					 				
+					return redirect('Dept');
+				}	
+				
 	}
 
 	public function index() //THIS IS LANDING PAGE AFTER LOGIN FOR SUPER ADMIN SHOWING ALL DEPTS LIST THAT HAVE SUBMITTED SCHEMES//
@@ -21,7 +35,7 @@ WE ALREADY TESTED IN BY DELETING ALL HISTORY
 			   $config = [
 			   		'base_url'	=> base_url('Admin/index'),//BOZ HERE WE LOAD 'function index()' OF USER CONTROLLER//
 			   		'per_page'	=> 6,
-			   		'total_rows'=> $this->Schemes_model->count_all_dept(), //HERE 'count_all_articles()' IS THE FUNCTION WE MADE IN 'Schemes_model.php' file at line no. 42//
+			   		'total_rows'=> $this->Schemes_model->count_all_dept(), //HERE 'count_all_dept()' IS THE FUNCTION WE MADE IN 'Schemes_model.php' file at line no. 42//
 			   		'full_tag_open'	 => "<ul class='pagination'>",//THIS LINE IS NOW WORKING
 			   		'full_tag_close' => "</ul>",
 			   		'first_tag_open' => '<li>',
