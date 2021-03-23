@@ -4,16 +4,16 @@ class Admin  extends CI_Controller {
 	public function __construct()
 		{
 			parent::__construct();
-			if(! $this->session->userdata('user_id'))
+			if(! $this->session->userdata('dept_id'))
 			return redirect('Login');
 
-			$user_id = $this->session->userdata('user_id');
-			//print_r($user_id); exit;
+			$dept_id = $this->session->userdata('dept_id');
+			//print_r($dept_id); exit;
 			$admin_id = "Planing_and_Investment";
 /*THIS 'Planing_and_Investment' IS THE 'id' ALREADY MADE IN DATABASE AS SUPER ADMIN
   SUPER ADMIN IS THE DEPT. OF PLANNING & INVESTMENT, GOVT. OF ARUNACHAL PRADESH
  */
-			if ($user_id == $admin_id)
+			if ($dept_id == $admin_id)
 				{
 					$this->load->helper('form');
 					$this->load->model('Schemes_model');
@@ -73,7 +73,7 @@ class Admin  extends CI_Controller {
 		 $this->load->library('pagination');
 			   $config = [
 			   		'base_url'	=> base_url("Admin/search_results/$query"),//BOZ HERE WE LOAD 'function index()' OF USER CONTROLLER//
-			   		'per_page'	=> 5,
+			   		'per_page'	=> 2,
 			   		'total_rows'=> $this->Schemes_model->count_search_results($query), //HERE 'count_search_results($query)' IS THE FUNCTION WE MADE IN 'Schemes_model.php' file at line no. 86//
 			   		'full_tag_open'	 => "<ul class='pagination'>",//THIS LINE IS NOW WORKING
 			   		'full_tag_close' => "</ul>",
@@ -87,7 +87,7 @@ class Admin  extends CI_Controller {
 			   		'prev_tag_close' => '</li>',
 			   		'num_tag_open'	 => '<li>',
 			   		'num_tag_close' => '</li>',
-			   		'cur_tag_open'	 => "<li class='active'>",
+			   		'cur_tag_open'	 => "<li class='active'><a>",
 			   		'cur_tag_close' => '</a></li>',
 			  		];
 			   $this->pagination->initialize($config);
@@ -104,14 +104,14 @@ class Admin  extends CI_Controller {
 		$this->load->view('pub/scheme_detail', compact('art_id'));
 	}
 
-	public function dept_result( $user_id )
+	public function dept_result( $dept_id )
 	{
 
 		 $this->load->library('pagination');
 			   $config = [
-			   		'base_url'	=> base_url("User/dept_result/$user_id"),
+			   		'base_url'	=> base_url("Admin/dept_result/$dept_id"),
 			   		'per_page'	=> 5,
-			   		'total_rows'=> $this->Schemes_model->find_dept($user_id), //HERE 'find_dept($user_id)' IS THE FUNCTION WE MADE IN 'Schemes_model.php' file //
+			   		'total_rows'=> $this->Schemes_model->find_dept($dept_id), //HERE 'find_dept($dept_id)' IS THE FUNCTION WE MADE IN 'Schemes_model.php' file //
 			   		'full_tag_open'	 => "<ul class='pagination'>",
 			   		'full_tag_close' => "</ul>",
 			   		'first_tag_open' => '<li>',
@@ -130,7 +130,7 @@ class Admin  extends CI_Controller {
 			   $this->pagination->initialize($config);
 
 
-		$dept_id = $this->Schemes_model->dept_pagination( $user_id, $config['per_page'], $this->uri->segment(4) ); //HE WIL PASS THIS "$art_id" OBJECT INTO "scheme_detail.php" FILE OF VIEWS FOLDER//
+		$dept_id = $this->Schemes_model->dept_pagination( $dept_id, $config['per_page'], $this->uri->segment(4)); //HE WIL PASS THIS "$art_id" OBJECT INTO "scheme_detail.php" FILE OF VIEWS FOLDER//
 		$this->load->view('pub/dept_detail', compact('dept_id'));
 
 	}
@@ -142,9 +142,9 @@ class Admin  extends CI_Controller {
 		//$this->load->model('Schemes_model');
 		 $this->load->library('pagination');
 			   $config = [
-			   		'base_url'	=> base_url("User/category_result/$category"),
+			   		'base_url'	=> base_url("Admin/category_result/$category"),
 			   		'per_page'	=> 5,
-			   		'total_rows'=> $this->Schemes_model->find_category($category), //HERE 'find_dept($user_id)' IS THE FUNCTION WE MADE IN 'Schemes_model.php' file //
+			   		'total_rows'=> $this->Schemes_model->find_category($category), //HERE 'find_category($category)' IS THE FUNCTION WE MADE IN 'Schemes_model.php' file //
 			   		'full_tag_open'	 => "<ul class='pagination'>",
 			   		'full_tag_close' => "</ul>",
 			   		'first_tag_open' => '<li>',
@@ -157,13 +157,13 @@ class Admin  extends CI_Controller {
 			   		'prev_tag_close' => '</li>',
 			   		'num_tag_open'	 => '<li>',
 			   		'num_tag_close' => '</li>',
-			   		'cur_tag_open'	 => "<li class='active'>",
+			   		'cur_tag_open'	 => "<li class='active'><a>",
 			   		'cur_tag_close' => '</a></li>',
 			  		];
 			   $this->pagination->initialize($config);
 
 
-		$cat_id = $this->Schemes_model->category_pagination( $category, $config['per_page'], $this->uri->segment(4) ); //HE WIL PASS THIS "$art_id" OBJECT INTO "scheme_detail.php" FILE OF VIEWS FOLDER//
+		$cat_id = $this->Schemes_model->category_pagination( $category, $config['per_page'], $this->uri->segment(5) ); //HE WIL PASS THIS "$art_id" OBJECT INTO "scheme_detail.php" FILE OF VIEWS FOLDER//
 		$this->load->view('pub/category_detail', compact('cat_id'));
 
 	}
@@ -175,9 +175,9 @@ class Admin  extends CI_Controller {
 		//$this->load->model('Schemes_model');
 		 $this->load->library('pagination');
 			   $config = [
-			   		'base_url'	=> base_url("User/fund_result/$fund"),
+			   		'base_url'	=> base_url("Admin/fund_result/$fund"),
 			   		'per_page'	=> 5,
-			   		'total_rows'=> $this->Schemes_model->find_fund($fund), //HERE 'find_dept($user_id)' IS THE FUNCTION WE MADE IN 'Schemes_model.php' file //
+			   		'total_rows'=> $this->Schemes_model->find_fund($fund), //HERE 'find_dept($dept_id)' IS THE FUNCTION WE MADE IN 'Schemes_model.php' file //
 			   		'full_tag_open'	 => "<ul class='pagination'>",
 			   		'full_tag_close' => "</ul>",
 			   		'first_tag_open' => '<li>',
@@ -190,33 +190,26 @@ class Admin  extends CI_Controller {
 			   		'prev_tag_close' => '</li>',
 			   		'num_tag_open'	 => '<li>',
 			   		'num_tag_close' => '</li>',
-			   		'cur_tag_open'	 => "<li class='active'>",
+			   		'cur_tag_open'	 => "<li class='active'><a>",
 			   		'cur_tag_close' => '</a></li>',
 			  		];
 			   $this->pagination->initialize($config);
 
 
-		$fund_cat = $this->Schemes_model->fund_pagination( $fund, $config['per_page'], $this->uri->segment(4) ); //HE WIL PASS THIS "$art_id" OBJECT INTO "scheme_detail.php" FILE OF VIEWS FOLDER//
+		$fund_cat = $this->Schemes_model->fund_pagination( $fund, $config['per_page'], $this->uri->segment(4)); //HE WIL PASS THIS "$art_id" OBJECT INTO "scheme_detail.php" FILE OF VIEWS FOLDER//
 		$this->load->view('pub/fund_detail', compact('fund_cat'));
 
 	}
-
-	public function extra()
-		{
-			
-			$this->load->view('pub/extra');
-		}
-    
     /* FOR CATEGORY OF SINGLE DEPARTMENT */
     public function dept_category()
 	{
 		$category =  $this->uri->segment(3);
-        $user_id =  $this->uri->segment(4);	
+        $dept_id =  $this->uri->segment(4);	
 		//$this->load->helper('form');
 		//$this->load->model('Schemes_model');
 		 $this->load->library('pagination');
 			   $config = [
-			   		'base_url'	=> base_url("User/dept_result/$category/$user_id"),
+			   		'base_url'	=> base_url("User/dept_result/$category/$dept_id"),
 			   		'per_page'	=> 8,
 			   		'total_rows'=> $this->Schemes_model->find_dept_category(), 
 			   		'full_tag_open'	 => "<ul class='pagination'>",
@@ -231,13 +224,13 @@ class Admin  extends CI_Controller {
 			   		'prev_tag_close' => '</li>',
 			   		'num_tag_open'	 => '<li>',
 			   		'num_tag_close' => '</li>',
-			   		'cur_tag_open'	 => "<li class='active'>",
+			   		'cur_tag_open'	 => "<li class='active'><a>",
 			   		'cur_tag_close' => '</a></li>',
 			  		];
 			   $this->pagination->initialize($config);
 
 
-		$dept_cat = $this->Schemes_model->dept_category_pagination( $category, $user_id, $config['per_page'], $this->uri->segment(4) ); //HE WIL PASS THIS "$art_id" OBJECT INTO "scheme_detail.php" FILE OF VIEWS FOLDER//
+		$dept_cat = $this->Schemes_model->dept_category_pagination( $category, $dept_id, $config['per_page'], $this->uri->segment(4) ); //HE WIL PASS THIS "$art_id" OBJECT INTO "scheme_detail.php" FILE OF VIEWS FOLDER//
 		$this->load->view('pub/dept_cat_detail', compact('dept_cat'));
 
 	}
@@ -310,16 +303,12 @@ class Admin  extends CI_Controller {
 			
 	}
 
-	public function delete_scheme() /*FOR PLANING DEPT ONLY*/
+	public function extra()
 	{
-             /*we will make this function if require , note yet required */
+			
+		$this->load->view('pub/extra');
 	}
-	public function edit_scheme()/*FOR PLANING DEPT ONLY*/
-	{
-			/*we will make this function if require , note yet required */
-	}
+    
 
 }
-
-
 ?>
