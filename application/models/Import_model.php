@@ -7,7 +7,7 @@ class Import_model extends CI_Model {
 
     public function importData($data) {
 
-        $res = $this->db->insert_batch('schemes',$data);//HERE 'import' IS THE TABLE NAME//
+        $res = $this->db->insert_batch('schemes',$data);//HERE 'schemes' IS THE TABLE NAME//
         if($res){
             return TRUE;
         }else{
@@ -18,7 +18,7 @@ class Import_model extends CI_Model {
  
    public function count_all_scheme()
     {
-        $user_id = $this->session->userdata('user_id');
+        $dept_id = $this->session->userdata('dept_id');
         $query = $this->db
                             ->select(['name_scheme','id'])
                             ->from('schemes')
