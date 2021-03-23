@@ -2,15 +2,24 @@
 //THIS IS OUR DEFAULT CONTROLLER MADE THROUGH "routes.php" OF CONFIG FOLDER//
 class Login extends CI_Controller {
 
-		public function index()
+	public function __construct()
+   	{
+        parent::__construct();
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->load->model('loginmodel');
+    }
+
+	public function index()
 	{
-		if($this->session->userdata('user_id'))
+		if($this->session->userdata('dept_id'))
 			return redirect('Auth');
 
 		//$this->load->helper('form'); //WE LOAD THIS IN __construct //
 		$this->load->view('pub/admin_login');
 	}
-		public function officer_login()
+
+	public function officer_login()
 		{
 		//$this->load->library('form_validation'); WE LOAD THIS IN __construct //
 		$this->form_validation->set_rules('username','User Name','required|min_length[2]');
@@ -21,21 +30,32 @@ class Login extends CI_Controller {
 				$username = $this->input->post('username');
 				$password = $this->input->post('password');
 			
-		            $login_id = $this->loginmodel->login_valid($username,$password);
-					if($login_id)
+		            $user_row = $this->loginmodel->login_valid($username,$password);
+		            //print_r($user_row); exit;
+					if($user_row)
 					{
-								
-			
-						$this->session->set_userdata('user_id',$login_id);
-						//print_r($result); exit;
+						$login_id = $user_row->dept_id;
+						$role = $user_row->role;
+						$id = $user_row->id;
 						$admin_id = "Planing_and_Investment";
-						if ($login_id == $admin_id) {
-								//echo "You r Super admin :-  " . $login_id;
+						//print_r($u_id); exit;
+/*Here we set both 'id' and 'u_id' in the session, we set 'u_id' in the session only to use in 'DeptAdmin' controller and 'Approval_Model, get_role()' function*/						
+						$this->session->set_userdata('dept_id', $login_id);
+						$this->session->set_userdata('id', $id);
+
+						if ($role == 'admin') {
+
+							if ($login_id == $admin_id) {
+
 								return redirect('Auth');
 							}else{
-								//echo "You r Dept :-   " . $login_id;
-								return redirect('Dept');							
+								
+								return redirect('DeptAdmin');							
 							}
+
+						}else {
+							return redirect('Dept');
+						}
 
 					}else{
 							$this->session->set_flashdata('login_failed','Username or Password do not match');
@@ -52,21 +72,11 @@ class Login extends CI_Controller {
 		
 		}
 
-		public function logout()
-		{
-			$this->session->unset_userdata('user_id');
-			return redirect('Login');
-		}
-
-
-		 public function __construct()
-   		 {
-        parent::__construct();
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $this->load->model('loginmodel');
-    	}
-
+	public function logout()
+	{
+		$this->session->unset_userdata('dept_id');
+		return redirect('Login');
+	}
     	/*
     HERE BELOW WE CODE FOR CHANGE PASSWORD
     	*/
@@ -82,15 +92,15 @@ class Login extends CI_Controller {
 			$new_password = $this->input->post('newpass');
 			$conf_password = $this->input->post('confpassword');
 
-			$user_id = $this->session->userdata('user_id'); //TAKING USER_ID FROM SESSION//
+			$dept_id = $this->session->userdata('dept_id'); //TAKING dept_id FROM SESSION//
 
 			//$this->load->model('loginmodel'); //WE LOAD THIS IN __construct ABOVE //
-			$passwd = $this->loginmodel->getCurrPassword($user_id);
+			$passwd = $this->loginmodel->getCurrPassword($dept_id);
 			//print_r($passwd);
 			//exit();
 			if($passwd->pass == $curr_password){
 				if($new_password == $conf_password){
-					if($this->loginmodel->updatePassword($new_password, $user_id))
+					if($this->loginmodel->updatePassword($new_password, $dept_id))
 					{
 						
 						echo "PASSWORD UPDATED SUCCESFULLY";
@@ -113,7 +123,6 @@ class Login extends CI_Controller {
 	
 		}
 	}
-
 
 	public function user_detail()
 	{
